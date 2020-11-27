@@ -13,7 +13,7 @@ def scan(target):
 #domain converter
 def check_ip(ipaddress):
     try:
-        IP(ip)
+        ip(IP)
         return(ip)
     except ValueError:
         return socket.gethostbyname(ip)
