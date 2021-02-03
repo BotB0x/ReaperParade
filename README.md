@@ -1,2 +1,2 @@
 # ReaperParade
-networking tools and a Backdoor for servers
+networking tools, comes with a Backdoor for servers and computers
